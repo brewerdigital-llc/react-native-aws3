@@ -110,6 +110,7 @@ const formatPolicyForEncoding = (policy) => {
        {"Content-Type": policy.contentType},
        {"x-amz-credential": policy.credential},
        {"x-amz-algorithm": policy.algorithm},
+       {"x-amz-security-token": policy.sessionToken},
        {"x-amz-date": policy.date.amzDate}
     ]
   }
