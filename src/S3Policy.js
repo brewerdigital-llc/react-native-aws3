@@ -115,7 +115,7 @@ const formatPolicyForEncoding = (policy) => {
   };
   
   if(policy.sessionToken) {
-    formattedPolicy['x-amz-security-token'] = policy.sessionToken;
+    formattedPolicy.conditions.push({'x-amz-security-token': policy.sessionToken});
   }
   
   return formattedPolicy;
