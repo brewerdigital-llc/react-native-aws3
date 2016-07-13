@@ -100,7 +100,7 @@ const formatPolicyForRequestBody = (base64EncodedPolicy, signature, options) => 
 }
 
 const formatPolicyForEncoding = (policy) => {
-  return {
+  let formattedPolicy = {
     "expiration": policy.expiration,
     "conditions": [
        {"bucket": policy.bucket},
@@ -110,10 +110,15 @@ const formatPolicyForEncoding = (policy) => {
        {"Content-Type": policy.contentType},
        {"x-amz-credential": policy.credential},
        {"x-amz-algorithm": policy.algorithm},
-       {"x-amz-security-token": policy.sessionToken},
        {"x-amz-date": policy.date.amzDate}
     ]
+  };
+  
+  if(policy.sessionToken) {
+    formattedPolicy['x-amz-security-token'] = policy.sessionToken;
   }
+  
+  return formattedPolicy;
 }
 
 const getEncodedPolicy = (policy) => {
